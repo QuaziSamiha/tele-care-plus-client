@@ -1,0 +1,176 @@
+{
+  "HomePage": {
+    "title": "Hello!",
+    "content": "Welcome to our website"
+  },
+  "Home": {
+    "hero": {
+      "eyebrowLine1": "Introducing the Essence",
+      "eyebrowLine2": "A Collection for Him & Her",
+      "titleTop": "Beyond",
+      "titleBottom": "the Note.",
+      "subtitle": "Discover a world of profound scent.",
+      "rated": "4.8/5 Rated",
+      "lovedBy": "Loved by Thousands",
+      "cta": "Explore All Products"
+    },
+    "promoBannerAlt": "THP Promotion",
+    "categories": {
+      "title": "Shop by Categories",
+      "explore": "Explore",
+      "empty": "No categories available."
+    },
+    "promo": {
+      "limitedOffer": "Limited Offer",
+      "bestSeller": "Best Seller",
+      "productTitle": "Medicine Product",
+      "subtitle": "Home Medical Supplies",
+      "buyNow": "Buy Now"
+    },
+    "combo": {
+      "title": "Combo Product",
+      "empty": "No combo products yet."
+    },
+    "featured": {
+      "title": "Featured Product"
+    },
+    "best": {
+      "title": "Best Product"
+    },
+    "section": {
+      "viewAll": "View All",
+      "empty": "No products to show yet."
+    },
+    "blogs": {
+      "eyebrow": "INSIGHTS FOR BETTER HEALTH",
+      "titleTop": "We deliver trusted",
+      "titleBottom": "medical solutions daily",
+      "comments": "{count} comments",
+      "noComments": "No Comments"
+    },
+    "feedback": {
+      "eyebrow": "CUSTOMER FEEDBACK",
+      "title": "What People Are Saying"
+    },
+    "carousel": {
+      "pharmacy": "Pharmacy",
+      "relief": "Relief",
+      "expertise": "Expertise",
+      "care": "Care",
+      "health": "Health",
+      "support": "Support",
+      "wellness": "Wellness"
+    }
+  },
+  "Search": {
+    "title": "Search Products",
+    "placeholder": "Search by name, sku or slug...",
+    "button": "Search",
+    "loading": "Searching...",
+    "noResults": "No products found for \"{query}\"",
+    "viewAll": "View all results for \"{query}\"",
+    "recent": "Recent searches",
+    "clear": "Clear",
+    "comboBadge": "COMBO"
+  },
+  "SignUpPage": {
+    "title": "Sign Up"
+  },
+  "Auth": {
+    "signInTitle": "Sign In",
+    "signInSubtitle": "Enter your email and password to access your account",
+    "forgotPassword": "Forgot Password?",
+    "noAccount": "Don't have an account?",
+    "signUpLink": "Sign Up",
+    "signInGoogle": "Sign in with Google",
+    "signInButton": "Sign In",
+    "signUpTitle": "Sign Up",
+    "signUpSubtitle": "Join to enjoy faster checkout, order tracking & recommendations",
+    "name": "Name",
+    "namePlaceholder": "Enter your name",
+    "email": "Email",
+    "emailPlaceholder": "Enter your email",
+    "phone": "Phone Number",
+    "phonePlaceholder": "Enter your phone number",
+    "password": "Password",
+    "passwordPlaceholder": "Enter password",
+    "confirmPassword": "Confirm Password",
+    "confirmPasswordPlaceholder": "Enter confirm password",
+    "nextButton": "Next",
+    "orContinueWith": "or continue with",
+    "signUpGoogle": "Google",
+    "syncing": "Syncing...",
+    "alreadyHaveAccount": "Already have an account?",
+    "signInLink": "Sign In"
+  },
+  "UnderDevelopment": {
+    "title": "Under Development",
+    "subtitle": "We're working hard to bring you an amazing new health feature. This section is currently under construction.",
+    "progressTitle": "Development Progress",
+    "overall": "Overall Completion",
+    "comingSoon": "Coming in 2 weeks",
+    "expectedTitle": "Expected Completion",
+    "expectedDesc": "We're working diligently to complete this feature soon.",
+    "waitTitle": "Why the Wait?",
+    "waitDesc": "We're ensuring everything is perfect before launch. Quality takes time!",
+    "returnHome": "Return to Home",
+    "contactSupport": "Contact Support",
+    "exploreMore": "In the meantime, you can explore other sections of our platform."
+  },
+  "UnderDevModals": {
+    "underDevTitle": "Feature Under Development",
+    "underDevSubtitle": "We're currently perfecting this section to ensure you have the best experience possible.",
+    "progressLabel": "Current Progress",
+    "estimatedTime": "Estimated Launch",
+    "comingSoon": "Coming Soon",
+    "close": "Got it, thanks!",
+    "notifyMe": "Notify Me"
+  },
+  "Navbar": {
+    "Home": "Home",
+    "Product": "Product",
+    "Blog": "Blog",
+    "Contact": "Contact",
+    "login": "Login",
+    "searchTitle": "Search Products",
+    "searchPlaceholder": "Search..."
+  },
+  "Footer": {
+    "description": "Explore trusted medicines, health products, and everyday wellness tools crafted to make managing your health easier, safer, and more convenient.",
+    "quickLinks": "QUICK LINKS",
+    "support": "SUPPORT",
+    "help": "HELP",
+    "product": "Product",
+    "blog": "Blog",
+    "beautyAntiAging": "Beauty & Anti-Aging",
+    "basicHealthImmunity": "Basic Health & Immunity",
+    "targetedHealth": "Targeted Health",
+    "deliveryPolicy": "Delivery Policy",
+    "termsConditions": "Terms & Conditions",
+    "privacyPolicy": "Privacy Policy",
+    "cancellationPolicy": "Cancellation Policy",
+    "returnPolicy": "Return Policy",
+    "faq": "FAQ",
+    "contactUs": "Contact Us",
+    "termsOfUse": "Terms of Uses",
+    "copyright": "© {year} Copyright By Essence Lab"
+  },
+  "ContactPage": {
+    "pageTitle": "Contact",
+    "sectionTitle": "Contact us & our team",
+    "desc1": "We'd love to hear from you! Whether you have a question about your order, need help choosing the right product, or want to share feedback — the Essence Lab team is here to help.",
+    "desc2": "Have something specific in mind? Use the contact form below and we'll get back to you within 24–48 hours.",
+    "hotline": "Hotline Number : +66-2-726-6341",
+    "phone": "+66-2-726-6341",
+    "email": "info@example.com",
+    "nameLabel": "Name",
+    "namePlaceholder": "Enter Your Name",
+    "phoneLabel": "Phone",
+    "phonePlaceholder": "Enter Your Phone Number",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Enter Your Email",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Enter Your Message",
+    "sendButton": "Send Message"
+  }
+}

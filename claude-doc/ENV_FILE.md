@@ -1,14 +1,9 @@
+<details>
+  <summary><b>Prompt</b></summary>
 
+I am working on a **Next.js** project and need a clean, scalable **environment configuration setup** with proper `next/image` domain allowlist support across multiple environments and developer workflows.
 
-I am working on a **NestJS backend project** and need a clean, scalable **environment configuration setup** across multiple environments and developer workflows.
-
-Set up the following structure and files **strictly following NestJS conventions** using `@nestjs/config` with `ConfigModule` — do not introduce any additional env management libraries unless already present in the project.
-
----
-
-**⚠️ GLOBAL COMMENT CONVENTION — ENFORCE ACROSS ALL FILES WITHOUT EXCEPTION**
-
-Always write every comment strictly in the following format: `//* COMMENT` — where the prefix is always `//*` followed by a single space, and every letter in the comment text must be **fully UPPERCASED** with no exceptions across all files.
+Set up the following structure and files **strictly following Next.js conventions** — do not use any third-party env management libraries unless already present in the project:
 
 ---
 
@@ -16,141 +11,94 @@ Always write every comment strictly in the following format: `//* COMMENT` — w
 
 Create the following `.env` files with appropriate variables for each context:
 
-| File | Purpose |
-|---|---|
-| `.env.development.local` | **Developer A** — uses personal local database and local machine IP |
-| `.env.development` | **Developer B** — shared dev config, develops the project at a given time |
-| `.env.office` | Office/internal environment — points to office server DB (`192.168.0.221`) |
-| `.env.production` | Production — live database, live services, secrets either populated or commented out |
+| File                     | Purpose                                                                                      |
+| ------------------------ | -------------------------------------------------------------------------------------------- |
+| `.env.development.local` | **Developer A** — uses their own personal local database                                     |
+| `.env.development`       | **Developer B** (or shared dev) — develops the project at a given time, shared config        |
+| `.env.office`            | Office/internal development environment — points to office/shared dev server DB and services |
+| `.env.production`        | Production — live database URL, live API endpoints, all secrets placeholder-commented        |
 
-Each file must include the following variables:
+Each file must include at minimum:
 
-- `DATABASE_URL` — full PostgreSQL connection string
-- `NODE_ENV` — set to the correct label per environment
-- `PORT`
-- `API_PREFIX`
-- `BASE_URL`
-- `ALLOWED_ORIGINS`
-- `JWT_ACCESS_SECRET`
-- `JWT_ACCESS_EXPIRES_IN`
-- `JWT_REFRESH_SECRET`
-- `JWT_REFRESH_EXPIRES_IN`
-- `JWT_REFRESH_EXPIRES_IN_MS`
-- `MAIL_DRIVER`
-- `MAIL_HOST`
-- `MAIL_PORT`
-- `MAIL_USERNAME`
-- `MAIL_PASSWORD`
-- `MAIL_ENCRYPTION`
-- `MAIL_FROM`
-
-Use the following as the **reference baseline** for variable names, values, and structure — populate each env file with appropriate values derived from this:
-
-```dotenv
-//* DATABASE — OFFICE SERVER CREDENTIALS
-//* DB_USER=tsp_ecommerce
-//* DB_PASSWORD=tsp_ecommerce
-//* DB_HOST=192.168.0.221
-//* DB_PORT=5432
-//* DB_NAME=tsp_ecommerce
-DATABASE_URL="postgres://tsp_ecommerce:tsp_ecommerce@192.168.0.221:5432/tsp_ecommerce?schema=public"
-
-//* LOCAL DB CONFIGURATION
-//* DATABASE_URL="postgresql://postgres:muqit1234@localhost:5432/thp_ecommerce?schema=public"
-DATABASE_URL="postgres://postgres:samiha25@localhost:5432/thp_ecommerce?schema=public"
-
-NODE_ENV=development
-PORT=5001
-API_PREFIX=api/v1
-BASE_URL=http://localhost:5001
-ALLOWED_ORIGINS=http://localhost:5001
-
-//* JWT CONFIGURATION — KEY GENERATED USING BCRYPT WITH 12 ROUNDS, CONVERTED TO HEX STRING
-JWT_ACCESS_SECRET=beb705cc...
-JWT_ACCESS_EXPIRES_IN=5d
-JWT_REFRESH_SECRET=fe39ce6c...
-JWT_REFRESH_EXPIRES_IN=30d
-JWT_REFRESH_EXPIRES_IN_MS=2592000000
-
-//* MAIL SERVICE CONFIG — SMTP SERVER FOR ATI LIMITED
-MAIL_DRIVER=smtp
-MAIL_HOST=mail.atilimited.net
-MAIL_PORT=587
-MAIL_USERNAME=atidev@atilimited.net
-MAIL_PASSWORD='-A*j~[ugH[L8'
-MAIL_ENCRYPTION=tls
-MAIL_FROM=atidev@atilimited.net
-```
+- `NEXT_PUBLIC_API_BASE_URL`
+- `GOOGLE_CLIENT_ID`
+- `GOOGLE_CLIENT_SECRET` (set to the correct label per environment)
+- `NEXTAUTH_SECRET`
+- `NEXTAUTH_UR`
+- Any `NEXT_PUBLIC_*` variables needed for `next/image` remote domain configuration
+- Clear inline comments distinguishing each file's purpose
 
 ---
 
-**Task 2 — Environment-Specific Variable Rules**
+**Task 2 — next/image Remote Patterns Config**
 
-| Variable | `.env.development.local` | `.env.development` | `.env.office` | `.env.production` |
-|---|---|---|---|---|
-| `DATABASE_URL` | Developer A's local DB | Developer B's local DB | `192.168.0.221` office DB | Live DB — comment out if unknown |
-| `BASE_URL` | `localhost:5001` | `localhost:5001` | Office machine IP | Live domain |
-| `ALLOWED_ORIGINS` | `localhost:5001` | `localhost:5001` | Office machine IP | Live domain |
-| `NODE_ENV` | `development` | `development` | `development` | `production` |
-| `MAIL_*` | ATI SMTP shared across all | same | same | Live SMTP or commented out |
+In `next.config.js` (or `next.config.ts`), configure `images.remotePatterns` (not the deprecated `domains` array) so that:
 
-For `.env.production`:
-- Populate all variables with realistic live values where inferable
-- For unavailable or secret values, comment them out using `//* VARIABLE_NAME=value`
-- Never leave any variable as an empty string
-- Group all variables under `//* SECTION HEADER` comments
+- **Development / office** environments allow `localhost` and internal server hostnames
+- **Production** environment allows only the live CDN/image domain
+- The correct pattern is selected based on `NEXT_PUBLIC_APP_ENV` or `NODE_ENV` at build time
 
 ---
 
-**Task 3 — Custom yarn Scripts**
+**Task 3 — Custom npm/yarn Scripts**
 
 In `package.json`, define the following scripts:
 
-| Command | Behavior |
-|---|---|
-| `yarn start` | **Must** run `node dist/main` — production start, hard requirement |
-| `yarn start:dev` | Runs with `.env.development` using `NODE_ENV=development` |
-| `yarn start:local` | Runs with `.env.development.local` (Developer A) |
-| `yarn start:office` | Runs with `.env.office` (office environment) |
-| `yarn start:prod` | Runs `nest start --watch` in production-like mode |
-| `yarn build` | Standard `nest build` |
+| Command             | Behavior                                                                      |
+| ------------------- | ----------------------------------------------------------------------------- |
+| `yarn start`        | **Must** run the production build (`next start`) — this is a hard requirement |
+| `yarn dev`          | Runs with `.env.development` (Developer B / shared)                           |
+| `yarn dev:local`    | Runs with `.env.development.local` (Developer A / personal local DB)          |
+| `yarn dev:office`   | Runs with `.env.office` (office environment)                                  |
+| `yarn build`        | Standard `next build` for production                                          |
+| `yarn build:office` | Builds with office env injected                                               |
 
-Use `env-cmd` or `dotenv-cli` only if NestJS `ConfigModule` alone cannot load the custom `.env.office` and `.env.development.local` files — if added, install as `devDependency`.
+Use `env-cmd` or `dotenv-cli` only if `NODE_ENV`-based loading alone cannot satisfy the multi-env requirement — and if added, install it as a `devDependency`.
 
 ---
 
 **Task 4 — README.md — Running Commands Reference**
 
-Add a section titled `## Environment & Running Commands` that includes:
+Add a clearly formatted section to `README.md` titled `## Environment & Running Commands` that includes:
 
-- A table of every `yarn` command, the env file it loads, and its purpose
-- Setup instructions for Developer A and Developer B for their local `.env` files
-- A warning that `yarn start` runs the **compiled production build** and requires `yarn build` first
-- `.gitignore` reminder for which files must never be committed
+- A table listing every `yarn` command, the env file it uses, and its purpose
+- A short note on how Developer A and Developer B should set up their local `.env.development.local` (should not be committed — confirm `.gitignore` entry)
+- A warning block noting that `yarn start` runs **production mode** and requires a prior `yarn build`
+- `.env*.local` and `.env.production` gitignore reminders
 
 ---
 
-**Task 5 — .gitignore Entries**
+**Task 6 — Live Variable Population & Comment Convention**
 
-Confirm or add:
+For `.env.production` specifically:
+
+- Populate **all variables with their actual live values** where they are known or can be reasonably inferred from the project context
+- For any variable whose live value is **not yet available or must be kept secret**, comment it out using this exact pattern:
 
 ```
-.env*.local
-.env.production
-.env.office
+//* VARIABLE_NAME=your_live_value_here
 ```
+
+- Use `//* COMMENT` style for all inline section headers and explanatory notes inside `.env.production` — do not use `#` comments in this file
+- Every section must have a `//* ` header comment grouping related variables (e.g. `//* Database`, `//* Auth`, `//* Storage`, `//* Image CDN`)
+- No variable should be left as an empty string — either provide a realistic live value or comment it out with `//*`
+
+Apply the same `//* COMMENT` convention for section headers across **all other `.env` files** as well for consistency.
 
 ---
 
 **Output:**
 
 Return each file as a clearly labeled code block in this order:
+
 1. `.env.development.local`
 2. `.env.development`
 3. `.env.office`
 4. `.env.production`
-5. `package.json` scripts section only
-6. `README.md` environment section only
-7. `.gitignore` additions only
+5. `next.config.js` (or `.ts`)
+6. `package.json` scripts section only
+7. `README.md` environment section only
 
-No prose between code blocks. Inline `//* UPPERCASE COMMENTS` inside all files are required.
+No prose between code blocks. Inline comments inside files are encouraged for clarity.
+
+</details>

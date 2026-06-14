@@ -1,0 +1,306 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* * Tailwind Directives & Layers : At the top of the file, you define the Tailwind layers. This ensures your custom styles don't get overwritten by Tailwind's utility classes and vice-versa. */
+
+@layer base {
+  /* Global HTML element overrides */
+  body {
+    @apply antialiased bg-background text-foreground;
+    font-family: var(--font-poppins), sans-serif;
+  }
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+/* 
+@layer components {
+  Reusable complex styles that don't belong in a single component file */
+/* .btn-primary {
+    @apply px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors;
+  } 
+}*/
+
+/* * CSS Variables) - Instead of hardcoding colors, define them as CSS variables inside the :root selector. This makes it incredibly easy to implement Dark Mode and maintain brand consistency. */
+
+:root {
+  /* --background: #171717;
+  --foreground: #ffffff; */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+@theme inline {
+  /* --color-background: var(--background);
+  --color-foreground: var(--foreground); */
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-textPrimary: #111827;
+  --color-navyBlue: #211d70;
+  --color-text-error: #ef4444;
+  --color-primary-500: #a6ce39;
+  --color-primary-700: #769228;
+  --color-secondary-50: #e6f6ee;
+  --color-tertiary-50: #e6f7fd;
+  --color-tertiary-600: #009ed9;
+  --color-tertiary-700: #007caa;
+  --color-tertiary-800: #006083;
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --background: #ededed;
+    --foreground: #0a0a0a;
+  }
+} */
+
+/*
+In Tailwind v4, no longer need a heavy tailwind.config.js file unless you are doing complex customizations. 
+The engine detects classes automatically.
+*/
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+/* Styling for the dangerouslySetInnerHTML container */
+.rich-text-container .policy-section h3 {
+  @apply text-slate-800 font-bold text-xl mt-8 mb-4;
+}
+
+.rich-text-container .policy-section p {
+  @apply mb-4 leading-relaxed;
+}
+
+.rich-text-container .policy-section ol {
+  @apply list-decimal pl-5 space-y-3 mb-6;
+}
+
+.rich-text-container .policy-section strong {
+  @apply text-slate-800 font-semibold;
+}
+
+/* The Orange Warning Box from the images */
+.rich-text-container .warning-box {
+  @apply mt-10 p-6 bg-orange-50 border-l-4 border-orange-400 text-orange-700 text-sm font-medium leading-relaxed;
+}
+
+.quill-container {
+  border-radius: 0.2rem;
+  overflow: hidden;
+}
+
+.quill-container .ql-toolbar.ql-snow {
+  border-top-left-radius: 0.2rem;
+  border-top-right-radius: 0.2rem;
+  background-color: #f5f5f5;
+  border-color: #d4d4d4;
+  border-width: 1px;
+}
+
+.quill-container .ql-container.ql-snow {
+  border-bottom-left-radius: 0.2rem;
+  border-bottom-right-radius: 0.2rem;
+  border-color: #d4d4d4;
+  border-width: 1px;
+  min-height: 150px;
+  background-color: #ffffff;
+}
+
+.quill-container .ql-editor {
+  min-height: 150px;
+  max-height: 300px;
+  overflow-y: auto;
+  white-space: normal !important; /* Forces text to wrap */
+  word-break: break-word; /* Breaks long strings/URLs */
+  overflow-x: hidden; /* Disables horizontal scroll */
+  min-height: 150px;
+}
+
+/* Focus state */
+/* .quill-container .ql-container.ql-snow:focus-within { */
+/* border-color: #3b82f6; */
+/* box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.5); */
+/* } */
+
+/* Placeholder styling */
+.quill-container .ql-editor.ql-blank::before {
+  color: #1d293d;
+  /* font-style: italic; */
+}
+
+.quill-container .ql-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* This ensures lists and spacing look good when rendering HTML strings */
+.rich-text-container {
+  white-space: pre-line; /* preserve newlines from rich-text editor output */
+  word-break: break-word;
+}
+.rich-text-container ul {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+  white-space: normal;
+}
+.rich-text-container ol {
+  list-style-type: decimal;
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+  white-space: normal;
+}
+.rich-text-container p {
+  display: block;
+  margin-bottom: 0.75rem;
+  white-space: pre-line;
+  min-height: 1em; /* empty paragraphs from Quill still take a line */
+}
+
+/* Add this to your globals.css */
+.rich-text-content {
+  white-space: normal !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+}
+
+/* Fix for lists (ul/ol) to prevent them from sliding under the sidebar */
+.rich-text-content ul,
+.rich-text-content ol {
+  list-style-position: inside; /* Keeps bullets within the container */
+  margin-left: 0;
+  padding-left: 1rem;
+}
+
+/* Add these to your globals.css */
+
+.rich-text-container .ql-size-small {
+  font-size: 0.75em;
+}
+
+.rich-text-container .ql-size-large {
+  font-size: 1.5em;
+}
+
+.rich-text-container .ql-size-huge {
+  font-size: 2.5em;
+}
+
+/* If you want to support text alignment as well */
+.rich-text-container .ql-align-center {
+  text-align: center;
+}
+
+.rich-text-container .ql-align-right {
+  text-align: right;
+}
+
+.rich-text-container .ql-align-justify {
+  text-align: justify;
+}

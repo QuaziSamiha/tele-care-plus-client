@@ -1,0 +1,40 @@
+export const ROUTE_CONFIG = {
+  PUBLIC: [
+    "/",
+    "/product",
+    "/blog",
+    "/contact",
+    "/all-combo-product",
+    "/otp-verification",
+    "/forgot-password",
+    "/cancellation-policy",
+    "/return-policy",
+    "/delivery-policy",
+    "/privacy-policy",
+    "/terms-conditions",
+    // Error pages must be publicly reachable regardless of auth state
+    "/unauthorized",
+    "/forbidden",
+    "/network-error",
+    "/maintenance",
+    "/error",
+    "/rate-limit",
+  ],
+  AUTH: ["/signin", "/signup"],
+  CUSTOMER: ["/my-account", "/my-order", "/wishlist"],
+  ADMIN: [
+    "/dashboard/admin-dashboard",
+    "/dashboard/user",
+    "/dashboard/home",
+    "/dashboard/category",
+    "/dashboard/product",
+    "/dashboard/inventory",
+    "/dashboard/order",
+    "/dashboard/blog",
+    "/dashboard/contact",
+    "/dashboard/support",
+    "/dashboard/set-up",
+  ],
+} as const;
+
+export type RouteConfig = typeof ROUTE_CONFIG;
